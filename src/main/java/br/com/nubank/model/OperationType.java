@@ -1,4 +1,4 @@
-package br.com.nubank.domain.entities;
+package br.com.nubank.model;
 
 import com.google.gson.annotations.SerializedName;
 

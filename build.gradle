@@ -3,8 +3,8 @@ plugins {
     id 'java'
 }
 
-group = 'br.com.nubankbr'
-version = '1.0-SNAPSHOT'
+group = 'br.com.nubank'
+version = '1.0.0'
 
 apply plugin : "java"
 ext {
@@ -16,13 +16,13 @@ application {
 }
 
 jar {
+    duplicatesStrategy "exclude"
+    version = null
     manifest {
         attributes(
                 "Main-Class": javaMainClass
         )
     }
-//    archiveClassifier = "all"
-    duplicatesStrategy "exclude"
     from {
         configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
     }

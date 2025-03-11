@@ -1,6 +1,7 @@
 package br.com.nubank.utils;
 
-import br.com.nubank.domain.entities.Trade;
+import br.com.nubank.model.Tax;
+import br.com.nubank.model.Trade;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -12,5 +13,9 @@ public class JsonParser {
 
     public static List<Trade> parseArrayData(String arrayData) {
         return gson.fromJson(arrayData, new TypeToken<List<Trade>>(){}.getType());
+    }
+
+    public static String parseToString(List<Tax> list) {
+        return gson.toJson(list);
     }
 }
