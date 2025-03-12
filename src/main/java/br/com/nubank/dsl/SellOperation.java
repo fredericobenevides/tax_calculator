@@ -8,9 +8,8 @@ public class SellOperation {
     private final boolean processOperation;
     private final Trade trade;
     private final Wallet wallet;
-
-    private ProfitOperation profitOperation;
-    private LossOperation lossOperation;
+    private final ProfitOperation profitOperation;
+    private final LossOperation lossOperation;
 
     public SellOperation(boolean processOperation, Trade trade, Wallet wallet) {
         this.processOperation = processOperation;
@@ -55,6 +54,14 @@ public class SellOperation {
     }
 
     public TaxOperation tax() {
-        return new TaxOperation(trade, wallet, profitOperation.getProfit());
+        return new TaxOperation(processOperation, trade, wallet, profitOperation.getProfit());
+    }
+
+    public boolean isProcessOperation() {
+        return processOperation;
+    }
+
+    public ProfitOperation getProfitOperation() {
+        return profitOperation;
     }
 }

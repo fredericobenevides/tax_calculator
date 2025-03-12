@@ -42,4 +42,5 @@ public class When {
         }
         return new SellOperation(processOperation, this.trade, this.wallet);
     }
+
 }

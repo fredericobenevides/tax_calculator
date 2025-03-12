@@ -18,10 +18,6 @@ public class Trade {
         this.quantity = quantity;
     }
 
-    public double getTotal() {
-        return unitCost * quantity;
-    }
-
     public OperationType getOperationType() {
         return operationType;
     }

@@ -3,11 +3,8 @@ package br.com.nubank.dsl;
 import br.com.nubank.model.Trade;
 import br.com.nubank.model.Wallet;
 
-import java.util.Optional;
-
 public class BuyOperation {
 
-    private boolean execute;
     private final boolean processOperation;
     private final Trade trade;
     private final Wallet wallet;
@@ -26,6 +23,10 @@ public class BuyOperation {
     }
 
     public TaxOperation tax() {
-        return new TaxOperation(trade, wallet, 0);
+        return new TaxOperation(processOperation, trade, wallet, 0);
+    }
+
+    public boolean isProcessOperation() {
+        return processOperation;
     }
 }

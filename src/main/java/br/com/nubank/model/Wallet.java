@@ -1,6 +1,7 @@
 package br.com.nubank.model;
 
 public class Wallet {
+
     private double averageCost;
     private int quantity;
     private double totalCapitalLoss;
@@ -30,6 +31,10 @@ public class Wallet {
 
     public double getOperationCost() {
         return averageCost;
+    }
+
+    public int getQuantity() {
+        return quantity;
     }
 
     public double getTotalCapitalLoss() {

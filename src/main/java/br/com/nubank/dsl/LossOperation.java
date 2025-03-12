@@ -4,6 +4,7 @@ import br.com.nubank.model.Trade;
 import br.com.nubank.model.Wallet;
 
 public class LossOperation {
+
     private final SellOperation sellOperation;
     private final boolean processOperation;
     private final Trade trade;
@@ -35,5 +36,9 @@ public class LossOperation {
 
     public SellOperation and() {
         return sellOperation;
+    }
+
+    public double getLoss() {
+        return currentLoss;
     }
 }
