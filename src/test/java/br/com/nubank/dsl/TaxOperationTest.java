@@ -36,7 +36,6 @@ public class TaxOperationTest {
         operationData.withProcessOperation(false).withTrade(null).withWallet(wallet);
 
         TaxOperation operation = new TaxOperation(operationData, 1000);
-        TaxOperation.setTax(null);
         Tax tax = operation.free().generate();
         assertNull(tax);
     }

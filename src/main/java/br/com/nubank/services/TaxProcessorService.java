@@ -19,7 +19,7 @@ public class TaxProcessorService {
                     .isBuyOperation()
                         .addTradeToWallet()
                         .tax()
-                        .free()
+                            .free()
                     .or()
                     .isSellOperation()
                         .profit()
@@ -32,8 +32,8 @@ public class TaxProcessorService {
                         .deductCapitalLoss()
                         .removeTradeFromWallet()
                         .tax()
-                        .calculate()
-                        .generate();
+                            .calculate()
+                            .generate();
             listOfTax.add(tax);
         }
 

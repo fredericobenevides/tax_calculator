@@ -9,7 +9,6 @@ public class TaxOperation {
     private static final double PERCENTAGE = 0.20;
 
     private final double profit;
-    private static Tax tax;
     private final OperationData operationData;
 
     public TaxOperation(OperationData operationData, double profit) {
@@ -19,34 +18,36 @@ public class TaxOperation {
 
     public TaxOperation free() {
         if (this.operationData.isProcessOperation()) {
-            this.tax = Tax.emptyTax();
+            this.operationData.setTax(Tax.emptyTax());
         }
         return this;
     }
 
     public TaxOperation calculate() {
-        Trade trade = operationData.getTrade();
-
         if (this.operationData.isProcessOperation()) {
-            double total = trade.getUnitCost() * trade.getQuantity();
-            if (total > LIMIT_FREE_TAX) {
-                this.tax = new Tax(profit * PERCENTAGE);
-            } else {
-                tax = Tax.emptyTax();
+            Trade trade = operationData.getTrade();
+            Tax tax = null;
+
+            if (this.operationData.isProcessOperation()) {
+                double total = trade.getUnitCost() * trade.getQuantity();
+                if (total > LIMIT_FREE_TAX) {
+                    tax = new Tax(profit * PERCENTAGE);
+                } else {
+                    tax = Tax.emptyTax();
+                }
             }
+
+            this.operationData.setTax(tax);
         }
+
         return this;
     }
 
     public Tax generate() {
-        return tax;
+        return operationData.getTax();
     }
 
     public When or() {
         return new When(operationData);
-    }
-
-    public static void setTax(Tax tax) {
-        TaxOperation.tax = tax;
     }
 }

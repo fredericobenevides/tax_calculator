@@ -1,5 +1,6 @@
 package br.com.nubank.dsl;
 
+import br.com.nubank.model.Tax;
 import br.com.nubank.model.Trade;
 import br.com.nubank.model.Wallet;
 
@@ -8,6 +9,8 @@ public class OperationData {
     private boolean processOperation;
     private Trade trade;
     private Wallet wallet;
+
+    private Tax tax;
 
     public OperationData withProcessOperation(boolean processOperation) {
         this.processOperation = processOperation;
@@ -34,5 +37,13 @@ public class OperationData {
 
     public Wallet getWallet() {
         return wallet;
+    }
+
+    public void setTax(Tax tax) {
+        this.tax = tax;
+    }
+
+    public Tax getTax() {
+        return tax;
     }
 }
