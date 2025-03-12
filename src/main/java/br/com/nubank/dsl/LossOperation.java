@@ -18,7 +18,7 @@ public class LossOperation {
         Trade trade = operationData.getTrade();
         Wallet wallet = operationData.getWallet();
 
-        if (operationData.isProcessOperation()) {
+        if (operationData.isRunOperation()) {
             if (trade.getUnitCost() < wallet.getOperationCost()) {
                 currentLoss = (wallet.getOperationCost() - trade.getUnitCost()) * trade.getQuantity();
             }
@@ -29,7 +29,7 @@ public class LossOperation {
     public LossOperation addToWallet() {
         Wallet wallet = operationData.getWallet();
 
-        if (operationData.isProcessOperation()) {
+        if (operationData.isRunOperation()) {
             wallet.increaseCapitalLoss(currentLoss);
         }
         return this;

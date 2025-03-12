@@ -97,6 +97,6 @@ There are some disadvantages for sure, depending on the changes of the requireme
 just a single updated point. The good point with this design, this allows us to have the root starter point to keep the code simpler and easier for anyone 
 to understand and manage the code. 
 
-**Note:** currently the designed DSL use a property called `processOperation`. This field is a requirement to allow the code to decide which feature inside 
+**Note:** currently the designed DSL use a property called `runOperation`. This field is a requirement to allow the code to decide which feature inside 
 the chain must be executed or not. The DSL is not lazy so this field allow to decide if a chain in the buyOperation will be executed or in the sellOperation.
 This field is `initialized` during the creation of the `isBuyOperation` or `isSellOperation`.

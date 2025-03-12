@@ -15,7 +15,7 @@ public class BuyOperation {
         Trade trade = operationData.getTrade();
         Wallet wallet = operationData.getWallet();
 
-        if (operationData.isProcessOperation()) {
+        if (operationData.isRunOperation()) {
             wallet.addInvestment(trade.getUnitCost(), trade.getQuantity());
         }
         return this;
@@ -23,9 +23,5 @@ public class BuyOperation {
 
     public TaxOperation tax() {
         return new TaxOperation(operationData, 0);
-    }
-
-    public boolean isProcessOperation() {
-        return operationData.isProcessOperation();
     }
 }

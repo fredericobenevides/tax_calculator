@@ -6,19 +6,19 @@ import br.com.nubank.model.Wallet;
 
 public class OperationData {
 
-    private boolean processOperation;
+    private boolean runOperation;
     private Trade trade;
     private Wallet wallet;
 
     private Tax tax;
 
-    public OperationData withProcessOperation(boolean processOperation) {
-        this.processOperation = processOperation;
+    public OperationData withRunOperation(boolean runOperation) {
+        this.runOperation = runOperation;
         return this;
     }
 
-    public boolean isProcessOperation() {
-        return processOperation;
+    public boolean isRunOperation() {
+        return runOperation;
     }
 
     public OperationData withTrade(Trade trade) {

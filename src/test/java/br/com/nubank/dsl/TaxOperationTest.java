@@ -23,7 +23,7 @@ public class TaxOperationTest {
     @Test
     public void testFreeWhenProcessIsTrue() {
         OperationData operationData = new OperationData();
-        operationData.withProcessOperation(true).withTrade(null).withWallet(wallet);
+        operationData.withRunOperation(true).withTrade(null).withWallet(wallet);
 
         TaxOperation operation = new TaxOperation(operationData, 1000);
         Tax tax = operation.free().generate();
@@ -33,7 +33,7 @@ public class TaxOperationTest {
     @Test
     public void testFreeWhenProcessIsFalse() {
         OperationData operationData = new OperationData();
-        operationData.withProcessOperation(false).withTrade(null).withWallet(wallet);
+        operationData.withRunOperation(false).withTrade(null).withWallet(wallet);
 
         TaxOperation operation = new TaxOperation(operationData, 1000);
         Tax tax = operation.free().generate();
@@ -44,7 +44,7 @@ public class TaxOperationTest {
     public void testCalculateWhenTotalIsLessThanFreeTaxReturnsAnEmptyTax() {
         Trade trade = new Trade(OperationType.BUY, 10.0, 1000);
         OperationData operationData = new OperationData();
-        operationData.withProcessOperation(true).withTrade(trade).withWallet(wallet);
+        operationData.withRunOperation(true).withTrade(trade).withWallet(wallet);
 
         TaxOperation operation = new TaxOperation(operationData, 1000);
         Tax tax = operation.calculate().generate();
@@ -55,7 +55,7 @@ public class TaxOperationTest {
     public void testCalculateWhenTotalIsGreaterThanFreeTaxReturnsTax() {
         Trade trade = new Trade(OperationType.BUY, 10.0, 10000);
         OperationData operationData = new OperationData();
-        operationData.withProcessOperation(true).withTrade(trade).withWallet(wallet);
+        operationData.withRunOperation(true).withTrade(trade).withWallet(wallet);
 
         TaxOperation operation = new TaxOperation(operationData, 1000);
         Tax tax = operation.calculate().generate();
@@ -66,7 +66,7 @@ public class TaxOperationTest {
     public void testCalculateWhenProcessIsFalseReturnsAnEmptyTax() {
         Trade trade = new Trade(OperationType.BUY, 10.0, 10000);
         OperationData operationData = new OperationData();
-        operationData.withProcessOperation(false).withTrade(trade).withWallet(wallet);
+        operationData.withRunOperation(false).withTrade(trade).withWallet(wallet);
 
         TaxOperation operation = new TaxOperation(operationData, 1000);
         Tax tax = operation.calculate().generate();

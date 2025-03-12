@@ -20,9 +20,9 @@ public class BuyOperationTest {
     }
 
     @Test
-    public void testAddTradeToWalletWhenProcessOperationIsTrue() {
+    public void testAddTradeToWalletWhenRunOperationIsTrue() {
         OperationData operationData = new OperationData();
-        operationData.withProcessOperation(true).withTrade(trade).withWallet(wallet);
+        operationData.withRunOperation(true).withTrade(trade).withWallet(wallet);
 
         BuyOperation operation = new BuyOperation(operationData);
         operation.addTradeToWallet();
@@ -30,9 +30,9 @@ public class BuyOperationTest {
     }
 
     @Test
-    public void testAddTradeToWalletWhenProcessOperationIsFalse() {
+    public void testAddTradeToWalletWhenRunOperationIsFalse() {
         OperationData operationData = new OperationData();
-        operationData.withProcessOperation(false).withTrade(trade).withWallet(wallet);
+        operationData.withRunOperation(false).withTrade(trade).withWallet(wallet);
 
         BuyOperation operation = new BuyOperation(operationData);
         operation.addTradeToWallet();

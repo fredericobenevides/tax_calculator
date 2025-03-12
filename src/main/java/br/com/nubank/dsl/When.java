@@ -29,24 +29,24 @@ public class When {
     public BuyOperation isBuyOperation() {
         Trade trade = operationData.getTrade();
 
-        boolean processOperation = false;
+        boolean runOperation = false;
         if (OperationType.BUY == trade.getOperationType()) {
-            processOperation = true;
+            runOperation = true;
         }
 
-        operationData.withProcessOperation(processOperation);
+        operationData.withRunOperation(runOperation);
         return new BuyOperation(operationData);
     }
 
     public SellOperation isSellOperation() {
         Trade trade = operationData.getTrade();
 
-        boolean processOperation = false;
+        boolean runOperation = false;
         if (OperationType.SELL == trade.getOperationType()) {
-            processOperation = true;
+            runOperation = true;
         }
 
-        operationData.withProcessOperation(processOperation);
+        operationData.withRunOperation(runOperation);
         return new SellOperation(operationData);
     }
 

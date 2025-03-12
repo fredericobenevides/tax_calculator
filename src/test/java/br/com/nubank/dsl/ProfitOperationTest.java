@@ -25,7 +25,7 @@ public class ProfitOperationTest {
     public void testCalculateWhenUnitCostGreaterThanWalletOperationCostProfitIsCalculated() {
         Trade trade = new Trade(OperationType.BUY, 20.0, 1000);
         OperationData operationData = new OperationData();
-        operationData.withProcessOperation(true).withTrade(trade).withWallet(wallet);
+        operationData.withRunOperation(true).withTrade(trade).withWallet(wallet);
 
         ProfitOperation operation = new ProfitOperation(sellOperation, operationData);
         operation.setProfit(10);
@@ -37,7 +37,7 @@ public class ProfitOperationTest {
     public void testCalculateWhenUnitCostLessThanWalletOperationCostProfitIsNotCalculated() {
         Trade trade = new Trade(OperationType.BUY, 10.0, 1000);
         OperationData operationData = new OperationData();
-        operationData.withProcessOperation(true).withTrade(trade).withWallet(wallet);
+        operationData.withRunOperation(true).withTrade(trade).withWallet(wallet);
 
         ProfitOperation operation = new ProfitOperation(sellOperation, operationData);
         operation.setProfit(10);
@@ -49,7 +49,7 @@ public class ProfitOperationTest {
     public void testCalculateWhenProcessIsFalseProfitIsNotCalculated() {
         Trade trade = new Trade(OperationType.BUY, 10.0, 1000);
         OperationData operationData = new OperationData();
-        operationData.withProcessOperation(false).withTrade(trade).withWallet(wallet);
+        operationData.withRunOperation(false).withTrade(trade).withWallet(wallet);
 
         ProfitOperation operation = new ProfitOperation(sellOperation, operationData);
         operation.setProfit(10);

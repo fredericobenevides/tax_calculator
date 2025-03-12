@@ -12,28 +12,36 @@ public class WhenTest {
     @Test
     public void testIsBuyOperationWhenTradeIsBuy() {
         Trade trade = new Trade(OperationType.BUY, 10.0, 1000);
-        BuyOperation operation = When.trade(trade).isBuyOperation();
-        assertTrue(operation.isProcessOperation());
+        OperationData operationData = new OperationData();
+        operationData.withTrade(trade);
+        new When(operationData).isBuyOperation();
+        assertTrue(operationData.isRunOperation());
     }
 
     @Test
     public void testIsBuyOperationWhenTradeIsSell() {
         Trade trade = new Trade(OperationType.SELL, 10.0, 1000);
-        BuyOperation operation = When.trade(trade).isBuyOperation();
-        assertFalse(operation.isProcessOperation());
+        OperationData operationData = new OperationData();
+        operationData.withTrade(trade);
+        new When(operationData).isBuyOperation();
+        assertFalse(operationData.isRunOperation());
     }
 
     @Test
     public void testIsSellOperationWhenTradeIsSell() {
         Trade trade = new Trade(OperationType.SELL, 10.0, 1000);
-        SellOperation operation = When.trade(trade).isSellOperation();
-        assertTrue(operation.isProcessOperation());
+        OperationData operationData = new OperationData();
+        operationData.withTrade(trade);
+        new When(operationData).isSellOperation();
+        assertTrue(operationData.isRunOperation());
     }
 
     @Test
     public void testIsSellOperationWhenTradeIsBuy() {
         Trade trade = new Trade(OperationType.BUY, 10.0, 1000);
-        SellOperation operation = When.trade(trade).isSellOperation();
-        assertFalse(operation.isProcessOperation());
+        OperationData operationData = new OperationData();
+        operationData.withTrade(trade);
+        new When(operationData).isSellOperation();
+        assertFalse(operationData.isRunOperation());
     }
 }

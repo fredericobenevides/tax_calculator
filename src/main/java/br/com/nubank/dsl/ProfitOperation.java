@@ -17,7 +17,7 @@ public class ProfitOperation {
         Trade trade = operationData.getTrade();
         Wallet wallet = operationData.getWallet();
 
-        if (operationData.isProcessOperation()) {
+        if (operationData.isRunOperation()) {
             if (trade.getUnitCost() > wallet.getOperationCost()) {
                 currentProfit = (trade.getUnitCost() - wallet.getOperationCost()) * trade.getQuantity();
             }

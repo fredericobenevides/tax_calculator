@@ -17,18 +17,18 @@ public class TaxOperation {
     }
 
     public TaxOperation free() {
-        if (this.operationData.isProcessOperation()) {
+        if (this.operationData.isRunOperation()) {
             this.operationData.setTax(Tax.emptyTax());
         }
         return this;
     }
 
     public TaxOperation calculate() {
-        if (this.operationData.isProcessOperation()) {
+        if (this.operationData.isRunOperation()) {
             Trade trade = operationData.getTrade();
             Tax tax = null;
 
-            if (this.operationData.isProcessOperation()) {
+            if (this.operationData.isRunOperation()) {
                 double total = trade.getUnitCost() * trade.getQuantity();
                 if (total > LIMIT_FREE_TAX) {
                     tax = new Tax(profit * PERCENTAGE);

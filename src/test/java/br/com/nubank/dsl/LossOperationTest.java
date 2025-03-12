@@ -25,7 +25,7 @@ public class LossOperationTest {
     public void testCalculateWhenUnitCostLessThanWalletOperationCostLossIsCalculated() {
         Trade trade = new Trade(OperationType.BUY, 5.0, 1000);
         OperationData operationData = new OperationData();
-        operationData.withProcessOperation(true).withTrade(trade).withWallet(wallet);
+        operationData.withRunOperation(true).withTrade(trade).withWallet(wallet);
 
         LossOperation operation = new LossOperation(sellOperation, operationData);
         operation.calculate();
@@ -36,7 +36,7 @@ public class LossOperationTest {
     public void testCalculateWhenUnitCostGreaterThanWalletOperationCostLossIsNotCalculated() {
         Trade trade = new Trade(OperationType.BUY, 10.0, 1000);
         OperationData operationData = new OperationData();
-        operationData.withProcessOperation(true).withTrade(trade).withWallet(wallet);
+        operationData.withRunOperation(true).withTrade(trade).withWallet(wallet);
 
         ProfitOperation operation = new ProfitOperation(sellOperation, operationData);
         operation.setProfit(10);
@@ -48,7 +48,7 @@ public class LossOperationTest {
     public void testCalculateWhenProcessIsFalseLossIsNotCalculated() {
         Trade trade = new Trade(OperationType.BUY, 10.0, 1000);
         OperationData operationData = new OperationData();
-        operationData.withProcessOperation(false).withTrade(trade).withWallet(wallet);
+        operationData.withRunOperation(false).withTrade(trade).withWallet(wallet);
 
         ProfitOperation operation = new ProfitOperation(sellOperation, operationData);
         operation.setProfit(10);
@@ -60,7 +60,7 @@ public class LossOperationTest {
     public void testAddToWalletWhenProcessIsTrue() {
         Trade trade = new Trade(OperationType.BUY, 5.0, 1000);
         OperationData operationData = new OperationData();
-        operationData.withProcessOperation(true).withTrade(trade).withWallet(wallet);
+        operationData.withRunOperation(true).withTrade(trade).withWallet(wallet);
 
         LossOperation operation = new LossOperation(sellOperation, operationData);
         operation.calculate();
@@ -72,7 +72,7 @@ public class LossOperationTest {
     public void testAddToWalletWhenProcessIsFalse() {
         Trade trade = new Trade(OperationType.BUY, 5.0, 1000);
         OperationData operationData = new OperationData();
-        operationData.withProcessOperation(false).withTrade(trade).withWallet(wallet);
+        operationData.withRunOperation(false).withTrade(trade).withWallet(wallet);
 
         LossOperation operation = new LossOperation(sellOperation, operationData);
         operation.calculate();

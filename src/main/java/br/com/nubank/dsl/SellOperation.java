@@ -27,7 +27,7 @@ public class SellOperation {
         Wallet wallet = operationData.getWallet();
         double currentProfit = profitOperation.getProfit();
 
-        if (operationData.isProcessOperation()) {
+        if (operationData.isRunOperation()) {
             if (wallet.getTotalCapitalLoss() > 0) {
                 if (currentProfit > 0 && currentProfit > wallet.getTotalCapitalLoss()) {
                     currentProfit = currentProfit - wallet.getTotalCapitalLoss();
@@ -47,7 +47,7 @@ public class SellOperation {
         Trade trade = operationData.getTrade();
         Wallet wallet = operationData.getWallet();
 
-        if (operationData.isProcessOperation()) {
+        if (operationData.isRunOperation()) {
             wallet.removeInvestment(trade.getQuantity());
         }
         return this;
@@ -55,9 +55,5 @@ public class SellOperation {
 
     public TaxOperation tax() {
         return new TaxOperation(operationData, profitOperation.getProfit());
-    }
-
-    public boolean isProcessOperation() {
-        return operationData.isProcessOperation();
     }
 }
