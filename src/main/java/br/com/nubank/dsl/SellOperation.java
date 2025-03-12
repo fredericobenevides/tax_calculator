@@ -8,41 +8,29 @@ public class SellOperation {
     private final boolean processOperation;
     private final Trade trade;
     private final Wallet wallet;
-    private double currentProfit;
-    private double currentLoss;
+
+    private ProfitOperation profitOperation;
+    private LossOperation lossOperation;
 
     public SellOperation(boolean processOperation, Trade trade, Wallet wallet) {
         this.processOperation = processOperation;
         this.trade = trade;
         this.wallet = wallet;
+        this.profitOperation = new ProfitOperation(this, processOperation, trade, wallet);
+        this.lossOperation = new LossOperation(this, processOperation, trade, wallet);
     }
 
-    public SellOperation calculateProfit() {
-        if (processOperation) {
-            if (trade.getUnitCost() > wallet.getOperationCost()) {
-                currentProfit = (trade.getUnitCost() - wallet.getOperationCost()) * trade.getQuantity();
-            }
-        }
-        return this;
+    public ProfitOperation profit() {
+        return profitOperation;
     }
 
-    public SellOperation calculateLoss() {
-        if (processOperation) {
-            if (trade.getUnitCost() < wallet.getOperationCost()) {
-                currentLoss = (wallet.getOperationCost() - trade.getUnitCost()) * trade.getQuantity();
-            }
-        }
-        return this;
-    }
-
-    public SellOperation addLossToWallet() {
-        if (processOperation) {
-            wallet.increaseCapitalLoss(currentLoss);
-        }
-        return this;
+    public LossOperation loss() {
+        return lossOperation;
     }
 
     public SellOperation deductCapitalLoss() {
+        double currentProfit = profitOperation.getProfit();
+
         if (processOperation) {
             if (wallet.getTotalCapitalLoss() > 0) {
                 if (currentProfit > 0 && currentProfit > wallet.getTotalCapitalLoss()) {
@@ -54,6 +42,8 @@ public class SellOperation {
                 }
             }
         }
+
+        profitOperation.setProfit(currentProfit);
         return this;
     }
 
@@ -65,6 +55,6 @@ public class SellOperation {
     }
 
     public TaxOperation tax() {
-        return new TaxOperation(trade, wallet, currentProfit);
+        return new TaxOperation(trade, wallet, profitOperation.getProfit());
     }
 }

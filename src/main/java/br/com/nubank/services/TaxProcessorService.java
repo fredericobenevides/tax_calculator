@@ -16,21 +16,24 @@ public class TaxProcessorService {
 
         for (Trade trade : trades) {
             Tax tax = When.trade(trade).withWallet(wallet)
-                                  .isBuyOperation()
-                                       .addTradeToWallet()
-                                       .tax()
-                                       .free()
-                                  .or()
-                                  .isSellOperation()
-                                       .calculateProfit()
-                                       .calculateLoss()
-                                       .addLossToWallet()
-                                       .deductCapitalLoss()
-                                       .removeTradeFromWallet()
-                                       .tax()
-                                       .calculate()
-                                       .generate();
-
+                    .isBuyOperation()
+                        .addTradeToWallet()
+                        .tax()
+                        .free()
+                    .or()
+                    .isSellOperation()
+                        .profit()
+                            .calculate()
+                        .and()
+                        .loss()
+                            .calculate()
+                            .addToWallet()
+                        .and()
+                        .deductCapitalLoss()
+                        .removeTradeFromWallet()
+                        .tax()
+                        .calculate()
+                        .generate();
             listOfTax.add(tax);
         }
 
