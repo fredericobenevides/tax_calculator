@@ -8,17 +8,18 @@ public class When {
 
     private OperationData operationData;
 
-    private When(Trade trade) {
-        operationData = new OperationData();
-        operationData.withTrade(trade);
-    };
-
     public When(OperationData operationData) {
         this.operationData = operationData;
     }
 
-    public static When trade(Trade trade) {
-        return new When(trade);
+    public static When operation() {
+        OperationData operationData = new OperationData();
+        return new When(operationData);
+    }
+
+    public When withTrade(Trade trade) {
+        operationData.withTrade(trade);
+        return this;
     }
 
     public When withWallet(Wallet wallet) {

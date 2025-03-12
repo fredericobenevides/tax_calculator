@@ -15,7 +15,7 @@ public class TaxProcessorService {
         Wallet wallet = new Wallet();
 
         for (Trade trade : trades) {
-            Tax tax = When.trade(trade).withWallet(wallet)
+            Tax tax = When.operation().withTrade(trade).withWallet(wallet)
                     .isBuyOperation()
                         .addTradeToWallet()
                         .tax()
