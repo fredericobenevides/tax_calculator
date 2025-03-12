@@ -21,14 +21,20 @@ public class BuyOperationTest {
 
     @Test
     public void testAddTradeToWalletWhenProcessOperationIsTrue() {
-        BuyOperation operation = new BuyOperation(true, trade, wallet);
+        OperationData operationData = new OperationData();
+        operationData.withProcessOperation(true).withTrade(trade).withWallet(wallet);
+
+        BuyOperation operation = new BuyOperation(operationData);
         operation.addTradeToWallet();
         assertEquals(1000, wallet.getQuantity());
     }
 
     @Test
     public void testAddTradeToWalletWhenProcessOperationIsFalse() {
-        BuyOperation operation = new BuyOperation(false, trade, wallet);
+        OperationData operationData = new OperationData();
+        operationData.withProcessOperation(false).withTrade(trade).withWallet(wallet);
+
+        BuyOperation operation = new BuyOperation(operationData);
         operation.addTradeToWallet();
         assertEquals(0, wallet.getQuantity());
     }

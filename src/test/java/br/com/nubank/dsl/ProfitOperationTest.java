@@ -18,13 +18,16 @@ public class ProfitOperationTest {
 
         wallet = new Wallet();
         wallet.addInvestment(10, 1000);
-        sellOperation = new SellOperation(true, null, wallet);
+        sellOperation = new SellOperation(null);
     }
 
     @Test
     public void testCalculateWhenUnitCostGreaterThanWalletOperationCostProfitIsCalculated() {
         Trade trade = new Trade(OperationType.BUY, 20.0, 1000);
-        ProfitOperation operation = new ProfitOperation(sellOperation, true, trade, wallet);
+        OperationData operationData = new OperationData();
+        operationData.withProcessOperation(true).withTrade(trade).withWallet(wallet);
+
+        ProfitOperation operation = new ProfitOperation(sellOperation, operationData);
         operation.setProfit(10);
         operation.calculate();
         assertEquals(10000, operation.getProfit());
@@ -33,7 +36,10 @@ public class ProfitOperationTest {
     @Test
     public void testCalculateWhenUnitCostLessThanWalletOperationCostProfitIsNotCalculated() {
         Trade trade = new Trade(OperationType.BUY, 10.0, 1000);
-        ProfitOperation operation = new ProfitOperation(sellOperation, true, trade, wallet);
+        OperationData operationData = new OperationData();
+        operationData.withProcessOperation(true).withTrade(trade).withWallet(wallet);
+
+        ProfitOperation operation = new ProfitOperation(sellOperation, operationData);
         operation.setProfit(10);
         operation.calculate();
         assertEquals(10, operation.getProfit());
@@ -42,7 +48,10 @@ public class ProfitOperationTest {
     @Test
     public void testCalculateWhenProcessIsFalseProfitIsNotCalculated() {
         Trade trade = new Trade(OperationType.BUY, 10.0, 1000);
-        ProfitOperation operation = new ProfitOperation(sellOperation, false, trade, wallet);
+        OperationData operationData = new OperationData();
+        operationData.withProcessOperation(false).withTrade(trade).withWallet(wallet);
+
+        ProfitOperation operation = new ProfitOperation(sellOperation, operationData);
         operation.setProfit(10);
         operation.calculate();
         assertEquals(10, operation.getProfit());

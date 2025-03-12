@@ -24,6 +24,16 @@ public class WalletTest {
     }
 
     @Test
+    public void testAddInvestmentForMultipleInvestmentCalculateAveragePrice() {
+        Wallet wallet = new Wallet();
+        wallet.addInvestment(10.0, 10000);
+        wallet.addInvestment(25.0, 5000);
+        wallet.addInvestment(50.0, 1000);
+        assertEquals(17.1875, wallet.getOperationCost());
+        assertEquals(16000, wallet.getQuantity());
+    }
+
+    @Test
     public void testRemoveInvestment() {
         Wallet wallet = new Wallet();
         wallet.addInvestment(10.0, 10000);

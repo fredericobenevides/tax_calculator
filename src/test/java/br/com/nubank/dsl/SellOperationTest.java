@@ -22,7 +22,10 @@ public class SellOperationTest {
 
     @Test
     public void testDeductCapitalLossWhenCapitalLossGreaterThanWalletCapitalLoss() {
-        SellOperation operation = new SellOperation(true, trade, wallet);
+        OperationData operationData = new OperationData();
+        operationData.withProcessOperation(true).withTrade(trade).withWallet(wallet);
+
+        SellOperation operation = new SellOperation(operationData);
         operation.profit().setProfit(10000);
         wallet.increaseCapitalLoss(5000);
 
@@ -34,7 +37,10 @@ public class SellOperationTest {
 
     @Test
     public void testDeductCapitalLossWhenCapitalLossLessThanWalletCapitalLoss() {
-        SellOperation operation = new SellOperation(true, trade, wallet);
+        OperationData operationData = new OperationData();
+        operationData.withProcessOperation(true).withTrade(trade).withWallet(wallet);
+
+        SellOperation operation = new SellOperation(operationData);
         operation.profit().setProfit(5000);
         wallet.increaseCapitalLoss(10000);
 
@@ -46,7 +52,10 @@ public class SellOperationTest {
 
     @Test
     public void testDeductCapitalLossWhenProcessOperationIsFalse() {
-        SellOperation operation = new SellOperation(false, trade, wallet);
+        OperationData operationData = new OperationData();
+        operationData.withProcessOperation(false).withTrade(trade).withWallet(wallet);
+
+        SellOperation operation = new SellOperation(operationData);
         operation.profit().setProfit(10000);
         wallet.increaseCapitalLoss(5000);
 
@@ -58,14 +67,20 @@ public class SellOperationTest {
 
     @Test
     public void testRemoveTradeFromWalletWhenProcessOperationIsTrue() {
-        SellOperation operation = new SellOperation(true, trade, wallet);
+        OperationData operationData = new OperationData();
+        operationData.withProcessOperation(true).withTrade(trade).withWallet(wallet);
+
+        SellOperation operation = new SellOperation(operationData);
         operation.removeTradeFromWallet();
         assertEquals(9000, wallet.getQuantity());
     }
 
     @Test
     public void testRemoveTradeFromWalletWhenProcessOperationIsFalse() {
-        SellOperation operation = new SellOperation(false, trade, wallet);
+        OperationData operationData = new OperationData();
+        operationData.withProcessOperation(false).withTrade(trade).withWallet(wallet);
+
+        SellOperation operation = new SellOperation(operationData);
         operation.removeTradeFromWallet();
         assertEquals(10000, wallet.getQuantity());
     }

@@ -22,14 +22,21 @@ public class TaxOperationTest {
 
     @Test
     public void testFreeWhenProcessIsTrue() {
-        TaxOperation operation = new TaxOperation(true, null, wallet, 1000);
+        OperationData operationData = new OperationData();
+        operationData.withProcessOperation(true).withTrade(null).withWallet(wallet);
+
+        TaxOperation operation = new TaxOperation(operationData, 1000);
         Tax tax = operation.free().generate();
         assertEquals(0, tax.getTax());
     }
 
     @Test
     public void testFreeWhenProcessIsFalse() {
-        TaxOperation operation = new TaxOperation(false, null, wallet, 1000);
+        OperationData operationData = new OperationData();
+        operationData.withProcessOperation(false).withTrade(null).withWallet(wallet);
+
+        TaxOperation operation = new TaxOperation(operationData, 1000);
+        TaxOperation.setTax(null);
         Tax tax = operation.free().generate();
         assertNull(tax);
     }
@@ -37,7 +44,10 @@ public class TaxOperationTest {
     @Test
     public void testCalculateWhenTotalIsLessThanFreeTaxReturnsAnEmptyTax() {
         Trade trade = new Trade(OperationType.BUY, 10.0, 1000);
-        TaxOperation operation = new TaxOperation(true, trade, wallet, 1000);
+        OperationData operationData = new OperationData();
+        operationData.withProcessOperation(true).withTrade(trade).withWallet(wallet);
+
+        TaxOperation operation = new TaxOperation(operationData, 1000);
         Tax tax = operation.calculate().generate();
         assertEquals(0, tax.getTax());
     }
@@ -45,7 +55,10 @@ public class TaxOperationTest {
     @Test
     public void testCalculateWhenTotalIsGreaterThanFreeTaxReturnsTax() {
         Trade trade = new Trade(OperationType.BUY, 10.0, 10000);
-        TaxOperation operation = new TaxOperation(true, trade, wallet, 1000);
+        OperationData operationData = new OperationData();
+        operationData.withProcessOperation(true).withTrade(trade).withWallet(wallet);
+
+        TaxOperation operation = new TaxOperation(operationData, 1000);
         Tax tax = operation.calculate().generate();
         assertEquals(200, tax.getTax());
     }
@@ -53,7 +66,10 @@ public class TaxOperationTest {
     @Test
     public void testCalculateWhenProcessIsFalseReturnsAnEmptyTax() {
         Trade trade = new Trade(OperationType.BUY, 10.0, 10000);
-        TaxOperation operation = new TaxOperation(false, trade, wallet, 1000);
+        OperationData operationData = new OperationData();
+        operationData.withProcessOperation(false).withTrade(trade).withWallet(wallet);
+
+        TaxOperation operation = new TaxOperation(operationData, 1000);
         Tax tax = operation.calculate().generate();
         assertNull(tax);
     }

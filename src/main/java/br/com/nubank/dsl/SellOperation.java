@@ -5,18 +5,14 @@ import br.com.nubank.model.Wallet;
 
 public class SellOperation {
 
-    private final boolean processOperation;
-    private final Trade trade;
-    private final Wallet wallet;
     private final ProfitOperation profitOperation;
     private final LossOperation lossOperation;
+    private final OperationData operationData;
 
-    public SellOperation(boolean processOperation, Trade trade, Wallet wallet) {
-        this.processOperation = processOperation;
-        this.trade = trade;
-        this.wallet = wallet;
-        this.profitOperation = new ProfitOperation(this, processOperation, trade, wallet);
-        this.lossOperation = new LossOperation(this, processOperation, trade, wallet);
+    public SellOperation(OperationData operationData) {
+        this.operationData = operationData;
+        this.profitOperation = new ProfitOperation(this, operationData);
+        this.lossOperation = new LossOperation(this, operationData);
     }
 
     public ProfitOperation profit() {
@@ -28,9 +24,10 @@ public class SellOperation {
     }
 
     public SellOperation deductCapitalLoss() {
+        Wallet wallet = operationData.getWallet();
         double currentProfit = profitOperation.getProfit();
 
-        if (processOperation) {
+        if (operationData.isProcessOperation()) {
             if (wallet.getTotalCapitalLoss() > 0) {
                 if (currentProfit > 0 && currentProfit > wallet.getTotalCapitalLoss()) {
                     currentProfit = currentProfit - wallet.getTotalCapitalLoss();
@@ -47,21 +44,20 @@ public class SellOperation {
     }
 
     public SellOperation removeTradeFromWallet() {
-        if (processOperation) {
+        Trade trade = operationData.getTrade();
+        Wallet wallet = operationData.getWallet();
+
+        if (operationData.isProcessOperation()) {
             wallet.removeInvestment(trade.getQuantity());
         }
         return this;
     }
 
     public TaxOperation tax() {
-        return new TaxOperation(processOperation, trade, wallet, profitOperation.getProfit());
+        return new TaxOperation(operationData, profitOperation.getProfit());
     }
 
     public boolean isProcessOperation() {
-        return processOperation;
-    }
-
-    public ProfitOperation getProfitOperation() {
-        return profitOperation;
+        return operationData.isProcessOperation();
     }
 }

@@ -6,41 +6,50 @@ import br.com.nubank.model.Wallet;
 
 public class When {
 
-    private Trade trade;
-    private Wallet wallet;
+    private OperationData operationData;
+//    private Trade trade;
+//    private Wallet wallet;
 
-    public When(Trade trade, Wallet wallet) {
-        this.trade = trade;
-        this.wallet = wallet;
+    private When(Trade trade) {
+        operationData = new OperationData();
+        operationData.withTrade(trade);
     };
 
-    public When(Trade trade) {
-        this.trade = trade;
-    };
+    public When(OperationData operationData) {
+        this.operationData = operationData;
+    }
 
     public static When trade(Trade trade) {
         return new When(trade);
     }
 
     public When withWallet(Wallet wallet) {
-        this.wallet = wallet;
+        operationData.withWallet(wallet);
         return this;
     }
 
     public BuyOperation isBuyOperation() {
+        Trade trade = operationData.getTrade();
+
         boolean processOperation = false;
         if (OperationType.BUY == trade.getOperationType()) {
             processOperation = true;
         }
-        return new BuyOperation(processOperation, this.trade, this.wallet);
+
+        operationData.withProcessOperation(processOperation);
+        return new BuyOperation(operationData);
     }
 
     public SellOperation isSellOperation() {
+        Trade trade = operationData.getTrade();
+
         boolean processOperation = false;
         if (OperationType.SELL == trade.getOperationType()) {
             processOperation = true;
         }
-        return new SellOperation(processOperation, this.trade, this.wallet);
+
+        operationData.withProcessOperation(processOperation);
+        return new SellOperation(operationData);
     }
 
 }

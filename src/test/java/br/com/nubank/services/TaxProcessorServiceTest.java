@@ -135,4 +135,19 @@ public class TaxProcessorServiceTest {
         assertEquals(0.00, taxes.get(2).getTax());
         assertEquals(60000.00, taxes.get(3).getTax());
     }
+
+    @Test
+    public void testCalculateForMultiplesBuy() {
+        Trade trade1 = new Trade(OperationType.BUY, 10, 10000);
+        Trade trade2 = new Trade(OperationType.BUY, 25, 5000);
+        Trade trade3 = new Trade(OperationType.BUY, 50, 1000);
+        Trade trade4 = new Trade(OperationType.SELL, 25, 10000);
+
+        List<Tax> taxes = new TaxProcessorService().calculate(List.of(trade1, trade2, trade3, trade4));
+
+        assertEquals(0.00, taxes.get(0).getTax());
+        assertEquals(0.00, taxes.get(1).getTax());
+        assertEquals(0.00, taxes.get(2).getTax());
+        assertEquals(15625.00, taxes.get(3).getTax());
+    }
 }

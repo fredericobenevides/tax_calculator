@@ -5,20 +5,19 @@ import br.com.nubank.model.Wallet;
 
 public class ProfitOperation {
     private final SellOperation sellOperation;
-    private final boolean processOperation;
-    private final Trade trade;
-    private final Wallet wallet;
+    private final OperationData operationData;
     private double currentProfit;
 
-    public ProfitOperation(SellOperation sellOperation, boolean processOperation, Trade trade, Wallet wallet) {
+    public ProfitOperation(SellOperation sellOperation, OperationData operationData) {
         this.sellOperation = sellOperation;
-        this.processOperation = processOperation;
-        this.trade = trade;
-        this.wallet = wallet;
+        this.operationData = operationData;
     }
 
     public ProfitOperation calculate() {
-        if (processOperation) {
+        Trade trade = operationData.getTrade();
+        Wallet wallet = operationData.getWallet();
+
+        if (operationData.isProcessOperation()) {
             if (trade.getUnitCost() > wallet.getOperationCost()) {
                 currentProfit = (trade.getUnitCost() - wallet.getOperationCost()) * trade.getQuantity();
             }
