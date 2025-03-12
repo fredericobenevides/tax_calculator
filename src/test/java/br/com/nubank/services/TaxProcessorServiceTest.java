@@ -9,7 +9,7 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class TaxServiceTest {
+public class TaxProcessorServiceTest {
 
     @Test
     public void testCalculateForCase1() {
@@ -17,7 +17,7 @@ public class TaxServiceTest {
         Trade trade2 = new Trade(OperationType.SELL, 15, 50);
         Trade trade3 = new Trade(OperationType.SELL, 15, 50);
 
-        List<Tax> taxes = new TaxService().calculate(List.of(trade1, trade2, trade3));
+        List<Tax> taxes = new TaxProcessorService().calculate(List.of(trade1, trade2, trade3));
 
         assertEquals(0.00, taxes.get(0).getTax());
         assertEquals(0.00, taxes.get(1).getTax());
@@ -30,7 +30,7 @@ public class TaxServiceTest {
         Trade trade2 = new Trade(OperationType.SELL, 20, 5000);
         Trade trade3 = new Trade(OperationType.SELL, 5, 5000);
 
-        List<Tax> taxes = new TaxService().calculate(List.of(trade1, trade2, trade3));
+        List<Tax> taxes = new TaxProcessorService().calculate(List.of(trade1, trade2, trade3));
 
         assertEquals(0.00, taxes.get(0).getTax());
         assertEquals(10000.00, taxes.get(1).getTax());
@@ -43,7 +43,7 @@ public class TaxServiceTest {
         Trade trade2 = new Trade(OperationType.SELL, 5, 5000);
         Trade trade3 = new Trade(OperationType.SELL, 20, 3000);
 
-        List<Tax> taxes = new TaxService().calculate(List.of(trade1, trade2, trade3));
+        List<Tax> taxes = new TaxProcessorService().calculate(List.of(trade1, trade2, trade3));
 
         assertEquals(0.00, taxes.get(0).getTax());
         assertEquals(0.00, taxes.get(1).getTax());
@@ -56,7 +56,7 @@ public class TaxServiceTest {
         Trade trade2 = new Trade(OperationType.BUY, 25, 5000);
         Trade trade3 = new Trade(OperationType.SELL, 15, 10000);
 
-        List<Tax> taxes = new TaxService().calculate(List.of(trade1, trade2, trade3));
+        List<Tax> taxes = new TaxProcessorService().calculate(List.of(trade1, trade2, trade3));
 
         assertEquals(0.00, taxes.get(0).getTax());
         assertEquals(0.00, taxes.get(1).getTax());
@@ -70,7 +70,7 @@ public class TaxServiceTest {
         Trade trade3 = new Trade(OperationType.SELL, 15, 10000);
         Trade trade4 = new Trade(OperationType.SELL, 25, 5000);
 
-        List<Tax> taxes = new TaxService().calculate(List.of(trade1, trade2, trade3, trade4));
+        List<Tax> taxes = new TaxProcessorService().calculate(List.of(trade1, trade2, trade3, trade4));
 
         assertEquals(0.00, taxes.get(0).getTax());
         assertEquals(0.00, taxes.get(1).getTax());
@@ -86,7 +86,7 @@ public class TaxServiceTest {
         Trade trade4 = new Trade(OperationType.SELL, 20, 2000);
         Trade trade5 = new Trade(OperationType.SELL, 25, 1000);
 
-        List<Tax> taxes = new TaxService().calculate(List.of(trade1, trade2, trade3, trade4, trade5));
+        List<Tax> taxes = new TaxProcessorService().calculate(List.of(trade1, trade2, trade3, trade4, trade5));
 
         assertEquals(0.00, taxes.get(0).getTax());
         assertEquals(0.00, taxes.get(1).getTax());
@@ -107,7 +107,7 @@ public class TaxServiceTest {
         Trade trade8 = new Trade(OperationType.SELL, 30, 4350);
         Trade trade9 = new Trade(OperationType.SELL, 30, 650);
 
-        List<Tax> taxes = new TaxService().calculate(List.of(trade1, trade2, trade3, trade4, trade5,
+        List<Tax> taxes = new TaxProcessorService().calculate(List.of(trade1, trade2, trade3, trade4, trade5,
                                                                 trade6, trade7, trade8, trade9));
 
         assertEquals(0.00, taxes.get(0).getTax());
@@ -128,7 +128,7 @@ public class TaxServiceTest {
         Trade trade3 = new Trade(OperationType.BUY, 20, 10000);
         Trade trade4 = new Trade(OperationType.SELL, 50, 10000);
 
-        List<Tax> taxes = new TaxService().calculate(List.of(trade1, trade2, trade3, trade4));
+        List<Tax> taxes = new TaxProcessorService().calculate(List.of(trade1, trade2, trade3, trade4));
 
         assertEquals(0.00, taxes.get(0).getTax());
         assertEquals(80000.00, taxes.get(1).getTax());

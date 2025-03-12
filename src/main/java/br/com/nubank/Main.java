@@ -2,7 +2,7 @@ package br.com.nubank;
 
 import br.com.nubank.model.Tax;
 import br.com.nubank.model.Trade;
-import br.com.nubank.services.TaxService;
+import br.com.nubank.services.TaxProcessorService;
 import br.com.nubank.utils.InputReader;
 import br.com.nubank.utils.JsonParser;
 
@@ -16,7 +16,7 @@ public class Main {
         for (String jsonString : listData) {
             List<Trade> trades = JsonParser.parseArrayData(jsonString);
 
-            List<Tax> taxes = new TaxService().calculate(trades);
+            List<Tax> taxes = new TaxProcessorService().calculate(trades);
             String jsonData = JsonParser.parseToString(taxes);
             System.out.println(jsonData);
         }
