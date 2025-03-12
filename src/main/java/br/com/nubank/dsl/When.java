@@ -7,8 +7,6 @@ import br.com.nubank.model.Wallet;
 public class When {
 
     private OperationData operationData;
-//    private Trade trade;
-//    private Wallet wallet;
 
     private When(Trade trade) {
         operationData = new OperationData();
