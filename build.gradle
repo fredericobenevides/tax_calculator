@@ -3,12 +3,12 @@ plugins {
     id 'java'
 }
 
-group = 'br.com.nubank'
+group = 'br.com.bank'
 version = '1.0.0'
 
 apply plugin : "java"
 ext {
-    javaMainClass = "br.com.nubank.Main"
+    javaMainClass = "br.com.bank.Main"
 }
 
 application {
